@@ -26,6 +26,7 @@ Route::group(array('prefix' => 'data-club'), function () {
     Route::get('/', [ClubController::class, 'index'])->name('data-club');
     Route::post('/form', [ClubController::class, 'form'])->name('club-form');
     Route::post('/store', [ClubController::class, 'store'])->name('club-store');
+    Route::post('/destroy', [ClubController::class, 'destroy'])->name('club-destroy');
 });
 
 Route::group(array('prefix' => 'data-klasemen'), function () {

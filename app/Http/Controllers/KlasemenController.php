@@ -154,14 +154,6 @@ class KlasemenController extends Controller
     public function destroy(Request $request) 
     {
         try {
-            // $data = DataKlasemen::find($request->id);
-            // if (!$data) {
-			// 	return response()->json([
-			// 		'error' => 'Data not found'
-			// 	], 404);
-			// }
-	
-			// $data->delete();
             DataKlasemen::where('id_klasemen', $request->id)->delete();
 	
 			return response()->json([

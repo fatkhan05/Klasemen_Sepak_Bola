@@ -1,16 +1,16 @@
 <div class="card card-default mt-5">
     <div class="card-header" style="background-color: #1A4237; color: #ffffff;">
-        <h3 class="card-title">Tambah Data Club</h3>          
+        <h3 class="card-title">{{ $data ? 'Edit' : 'Tambah' }} Data Club</h3>          
     </div>
     <form class="form-save">
+        <input type="hidden" name="id" id="id">
         <div class="card-body">
-            <input type="hidden" name="id" id="id">
             <div class="container row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="namaClub" class="form-label">Nama Club</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nama_club" id="nama_club">
+                            <input type="text" class="form-control" value="{{ $data ? $data->nama_club : ''}}" name="nama_club" id="nama_club">
                         </div>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label for="kotaKlub" class="form-label">Kota Club</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="kota_club" id="kota_club">
+                            <input type="text" class="form-control" value="{{ $data ? $data->kota_club : ''}}" name="kota_club" id="kota_club">
                         </div>
                     </div>
                 </div>

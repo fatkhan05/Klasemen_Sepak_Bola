@@ -28,10 +28,12 @@ class ClubController extends Controller
         return view('mst_club.main')->with('data');
     }
 
-    public function form()
+    public function form(Request $request)
     {
         try {
-            $content = view('mst_club.form')->render();
+            $data['data'] = (!empty($request->id)) ? DataClub::find($request->id) : "";
+            $content = view('mst_club.form', $data)->render();
+            // return $data;
 			return ['status' => 'success', 'content' => $content];
         } catch (\Exception $e) {
             return ['status' => 'success', 'content' => '','errMsg'=>$e->getMessage()];
@@ -99,8 +101,19 @@ class ClubController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Request $request) 
     {
-        //
+        try {
+            DataClub::where('id_club', $request->id)->delete();
+	
+			return response()->json([
+				'success' => 'Data Berhasil Dihapus'
+			]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 500,
+				'error' => 'Terjadi kesalahan, silahkan coba lagi'
+			]); 
+        }
     }
 }

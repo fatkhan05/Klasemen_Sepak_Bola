@@ -126,6 +126,21 @@
 		});
 	}
 
+	function editForm(id){
+        console.log(id);
+        $.post("{!! route('form-tambah-data') !!}", {
+            id: id
+        }).done(function(data) {
+            if (data.status == 'success') {
+                // $('.modal-page').html('');
+                $('.other-page').html(data.content).fadeIn();
+                // $('#modal_tambah').modal('show');
+            } else {
+                $('.main-page').show();
+            }
+        });
+    }
+
 	function deleteRow(id) {
 				// console.log(id);
 		Swal.fire({

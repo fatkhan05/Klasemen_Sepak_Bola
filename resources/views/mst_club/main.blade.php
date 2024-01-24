@@ -75,5 +75,73 @@
             }
         });
     }
+
+	function editForm(id){
+        console.log(id);
+		$('.main-page').hide();
+        $.post("{!! route('club-form') !!}", {
+            id: id
+        }).done(function(data) {
+            if (data.status == 'success') {
+                $('.other-page').html(data.content).fadeIn();
+            } else {
+                $('.main-page').show();
+            }
+        });
+    }
+
+    function deleteRow(id) {
+		// console.log(id);
+		Swal.fire({
+			title: 'Apakah Anda Yakin Akan Menghapus Data Ini?',
+			text: 'Data akan Dihapus, dan Tidak dapat diperbaharui kembali !!',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#1A4237',
+			confirmButtonText: 'Ya, Hapus Data',
+			cancelButtonText: 'Batal'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: '{{ route("club-destroy") }}', 
+					method: 'POST', 
+					data: {
+						_method: 'POST', 
+						_token: '{{ csrf_token() }}', 
+						id: id 
+					},
+					success: function(response) {
+						if (response.success) {
+							Swal.fire({
+								icon: 'success',
+								title: 'Deleted!',
+								timer: 1500,
+								confirmButtonColor: '#1A4237',
+								text: response.success
+							});
+							location.reload();
+						} else {
+							Swal.fire({
+								icon: 'error',
+								title: 'Error',
+								timer: 1500,
+								confirmButtonColor: '#1A4237',
+								text: response.error
+							});
+						}
+					},
+					error: function() {
+						Swal.fire({
+							icon: 'error',
+							title: 'Error',
+							timer: 1500,
+							confirmButtonColor: '#1A4237',
+							text: 'Data Gagal Dihapus!!.'
+						});
+					}
+				});
+			}
+		});
+	}
 </script>
 @endpush
