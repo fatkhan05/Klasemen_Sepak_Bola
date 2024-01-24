@@ -71,48 +71,34 @@ class KlasemenController extends Controller
 
     public function store(Request $request)
     {
+        // return $request->all();
         $validator = Validator::make($request->all(), [
-            $rules = [
-                // 'score_main' => 'unique:data_klasemen,main|required',
-                // 'score_menang' => 'unique:data_klasemen,menang|required',
-                // 'score_seri' => 'unique:data_klasemen,seri|required',
-                // 'score_kalah' => 'unique:data_klasemen,kalah|required',
-                // 'score_goal_menang' => 'unique:data_klasemen,goal_menang|required',
-                // 'score_goal_kalah' => 'unique:data_klasemen,goal_kalah|required',
-                'score_main' => ['required', new UniqueScores($request->id)],
-                'score_menang' => ['required', new UniqueScores($request->id)],
-                'score_seri' => ['required', new UniqueScores($request->id)],
-                'score_kalah' => ['required', new UniqueScores($request->id)],
-                'score_goal_menang' => ['required', new UniqueScores($request->id)],
-                'score_goal_kalah' => ['required', new UniqueScores($request->id)],
+            // $rules = [
+                // 'main_single_club' => 'unique:data_klasemen,main|required',
+                // 'menang_single_club' => 'unique:data_klasemen,menang|required',
+                // 'seri_single_club' => 'unique:data_klasemen,seri|required',
+                // 'kalah_single_club' => 'unique:data_klasemen,kalah|required',
+                // 'goal_menang_single_club' => 'unique:data_klasemen,goal_menang|required',
+                // 'goal_kalah_single_club' => 'unique:data_klasemen,goal_kalah|required',
+                'main_single_club' => ['required', new UniqueScores($request->id)],
+                'menang_single_club' => ['required', new UniqueScores($request->id)],
+                'seri_single_club' => ['required', new UniqueScores($request->id)],
+                'kalah_single_club' => ['required', new UniqueScores($request->id)],
+                'goal_menang_single_club' => ['required', new UniqueScores($request->id)],
+                'goal_kalah_single_club' => ['required', new UniqueScores($request->id)],
             ],
-            $message = [
+            [
                 'required' => 'Kolom :attribute harus diisi',
                 'unique' => ':attribute sudah ada dalam database, Harap Masukkan Data Yang Lain'
             ]
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'code' => 201,
-                'message' => $validator->errors()->all(),
-            ]);
-        }
-        // if ($request->id) {
-		// 	$id = DataKlasemen::find($request->id)->menang;
-		// 	if ($id != $request->id) {
-		// 		$rules['menang'] = [Rule::unique('data_klasemen', 'menang')->ignore($request->id, 'id_klasemen')];
-		// 	}
-		// } else {
-		// 	$rules['menang'] = 'required|unique:data_klasemen';
-		// }
+        );
 
-        // if($validator->fails()) {
-        //     $pesan = $validator->errors();
-		// 	$pakai_pesan = join(',',$pesan->all());
-		// 	$return = ['status' => 'warning', 'code' => 201, 'message' => $pakai_pesan];
-		// 	return response()->json($return);
-        // }
+        if($validator->fails()) {
+            $pesan = $validator->errors();
+			$pakai_pesan = join(',',$pesan->all());
+			$return = ['status' => 'warning', 'code' => 201, 'message' => $pakai_pesan];
+			return response()->json($return);
+        }
 
         try {   
             DB::beginTransaction();

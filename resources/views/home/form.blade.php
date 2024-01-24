@@ -282,14 +282,11 @@ $(document).ready(function () {
 				},
             }).done(function(result) {
                 if (result.status === 'success') {
-                    // toastr.success(result.message, {
-                    //     positionClass: 'toast-top-right',
-                    //     closeButton: true
-                    // });
                     Swal.fire({
                         icon: 'success',
                         title: 'Success',
-                        text: result.message, // Menampilkan pesan kesalahan dari respons
+                        timer: 1500,
+                        text: result.message,
                         confirmButtonColor: '#1A4237',
                     });
                     $('.other-page').fadeOut(function() {
@@ -297,16 +294,24 @@ $(document).ready(function () {
                         $('.main-page').fadeIn();
                         $('#datagrid').DataTable().ajax.reload();
                     });
-                } else if (result.status === 'error') {
+                } else if (result.status === 'warning') { 
                     Swal.fire({
                         icon: 'warning',
                         title: 'Whoops!',
-                        text: result.message.join('\n'), // Menampilkan pesan kesalahan dari respons join('<br>')
+                        html: result.message, 
+                        confirmButtonColor: '#1A4237',
+                    });
+                } else if (result.status === 'error') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Whoops!',
+                        timer: 1500,
+                        text: 'Failed to save data. Please try again.',
                         confirmButtonColor: '#1A4237',
                     });
                 }
             });
-        });
+        }); 
 
     function deleteForm(id) {
         // console.log(id);
