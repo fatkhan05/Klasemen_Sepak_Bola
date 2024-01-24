@@ -3,6 +3,7 @@
         <h3 class="card-title">{{ $data ? 'Edit' : 'Tambah' }} Data Baru</h3>          
     </div>
     <form class="form-save">
+        <input type="hidden" name="id" id="id" value="{{ $data ? $data->id_klasemen : '' }}">
         <div class="card-body">
             <div class="container row">
                 {{-- Radio Button --}}
@@ -23,8 +24,7 @@
                             </label>
                         </div>
                     </div>
-                </div>
-                <input type="hidden" name="id" id="id" value="">
+                </div>                
                 {{-- Single Input Form --}}
                 <div class="single-input" id="single_input_form" style="display: none">
                     <div class="row">

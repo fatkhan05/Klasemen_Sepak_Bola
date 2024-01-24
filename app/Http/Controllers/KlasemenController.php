@@ -61,7 +61,7 @@ class KlasemenController extends Controller
     public function form(Request $request)
     {
         try {
-            $data['data'] = ($request->id) ? DataKlasemen::find($request->id) : "";
+            $data['data'] = (!empty(($request->id))) ? DataKlasemen::find($request->id) : "";
             $data['club'] = DataClub::get();
             // return $data;
             $content = view('home.form', $data)->render();
