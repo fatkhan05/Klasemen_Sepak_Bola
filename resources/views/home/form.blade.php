@@ -1,11 +1,10 @@
 <div class="card card-default mt-5">
     <div class="card-header" style="background-color: #1A4237; color: #ffffff;">
-        <h3 class="card-title">Tambah Data Baru</h3>          
+        <h3 class="card-title">{{ $data ? 'Edit' : 'Tambah' }} Data Baru</h3>          
     </div>
     <form class="form-save">
         <div class="card-body">
             <div class="container row">
-                <input type="hidden" name="id" id="id">
                 {{-- Radio Button --}}
                 <div class="type-input mb-3 row">
                     <div class="col-md-6">
@@ -25,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-
+                <input type="hidden" name="id" id="id" value="">
                 {{-- Single Input Form --}}
                 <div class="single-input" id="single_input_form" style="display: none">
                     <div class="row">
@@ -36,8 +35,9 @@
                                     {{-- <input type="text" class="form-control" name="single_nama_club" id="single_nama_club" placeholder="Nama Club"> --}}
                                     <select name="single_nama_club" id="single_nama_club" class="form-select">
                                         <option value="" selected>.:: PILIH ::.
+                                            {{-- {{ ($data->club_id ?? '') == $cl->id_club ? 'selected' : '' }} --}}
                                             @foreach ($club as $cl)
-                                                <option value="{{ $cl->id_club }}">{{ $cl->nama_club }}</option>
+                                                <option  value="{{ $cl->id_club }}">{{ $cl->nama_club }}</option> 
                                             @endforeach
                                         </option>
                                     </select>
@@ -140,7 +140,7 @@ $(document).ready(function () {
             let detail_club = [];
             console.log(detail_club);
             var generateId = makeid(5);
-            var idClub = $('#id_club').val();
+            var idClub = $('#id').val();
 
             $(document).on('input', '.score', function() {
                 var inputValue = $(this).val();
@@ -149,7 +149,7 @@ $(document).ready(function () {
             });
 
             // Cek apakah data.id_club memiliki nilai (untuk menentukan apakah ini operasi update)
-            if (data && data.id_club) {
+            if (data && data.id_klasemen) {
                 isUpdate = true;
             }
             // Buat Dua input

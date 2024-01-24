@@ -33,7 +33,6 @@ class ClubController extends Controller
         try {
             $data['data'] = (!empty($request->id)) ? DataClub::find($request->id) : "";
             $content = view('mst_club.form', $data)->render();
-            // return $data;
 			return ['status' => 'success', 'content' => $content];
         } catch (\Exception $e) {
             return ['status' => 'success', 'content' => '','errMsg'=>$e->getMessage()];
@@ -63,8 +62,8 @@ class ClubController extends Controller
 
         try {
             DB::beginTransaction();
-            $newdata = (!empty($request->id)) ? DataClub::find($request->id) : new DataClub;
 
+            $newdata = (!empty($request->id)) ? DataClub::find($request->id) : new DataClub;
             $newdata->nama_club = $request->nama_club;
             $newdata->kota_club = $request->kota_club;
             $newdata->save();

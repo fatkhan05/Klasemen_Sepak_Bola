@@ -128,6 +128,7 @@
 
 	function editForm(id){
         console.log(id);
+		$('.main-page').hide();
         $.post("{!! route('form-tambah-data') !!}", {
             id: id
         }).done(function(data) {

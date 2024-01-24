@@ -58,10 +58,12 @@ class KlasemenController extends Controller
         ];
     }
 
-    public function form()
+    public function form(Request $request)
     {
         try {
+            $data['data'] = ($request->id) ? DataKlasemen::find($request->id) : "";
             $data['club'] = DataClub::get();
+            // return $data;
             $content = view('home.form', $data)->render();
 			return ['status' => 'success', 'content' => $content];
         } catch (\Exception $e) {
@@ -80,12 +82,12 @@ class KlasemenController extends Controller
                 // 'kalah_single_club' => 'unique:data_klasemen,kalah|required',
                 // 'goal_menang_single_club' => 'unique:data_klasemen,goal_menang|required',
                 // 'goal_kalah_single_club' => 'unique:data_klasemen,goal_kalah|required',
-                'main_single_club' => ['required', new UniqueScores($request->id)],
-                'menang_single_club' => ['required', new UniqueScores($request->id)],
-                'seri_single_club' => ['required', new UniqueScores($request->id)],
-                'kalah_single_club' => ['required', new UniqueScores($request->id)],
-                'goal_menang_single_club' => ['required', new UniqueScores($request->id)],
-                'goal_kalah_single_club' => ['required', new UniqueScores($request->id)],
+                'main_multiple_score_club' => ['required', new UniqueScores($request->id)],
+                'menang_multiple_score_club' => ['required', new UniqueScores($request->id)],
+                'seri_multiple_score_club' => ['required', new UniqueScores($request->id)],
+                'kalah_multiple_score_club' => ['required', new UniqueScores($request->id)],
+                'goal_menang_multiple_score_club' => ['required', new UniqueScores($request->id)],
+                'goal_kalah_multiple_score_club' => ['required', new UniqueScores($request->id)],
             ],
             [
                 'required' => 'Kolom :attribute harus diisi',
@@ -111,7 +113,7 @@ class KlasemenController extends Controller
                 // for ($i = 0; $i < count($request->nama_club); $i++) {
                     // $newdataMultiple = new DataKlasemen;
                     $newdataMultiple = (!empty($request->id)) ? DataKlasemen::find($request->id) : new DataKlasemen;
-                    $newdataMultiple->club_id = $request->main_multiple_score_club[$i];
+                    $newdataMultiple->club_id = $request->nama_club_multi_form[$i];
                     $newdataMultiple->main = $request->main_multiple_score_club[$i];
                     $newdataMultiple->menang = $request->menang_multiple_score_club[$i];
                     $newdataMultiple->seri = $request->seri_multiple_score_club[$i];
