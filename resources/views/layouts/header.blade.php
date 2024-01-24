@@ -32,10 +32,8 @@
 			<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 		</li>
 		<li class="nav-item d-none d-sm-inline-block">
-			{{-- <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a> --}}
 		</li>
 		<li class="nav-item d-none d-sm-inline-block">
-			{{-- <a href="{{ route('pengaturan') }}" class="nav-link">Pengaturan</a> --}}
 		</li>
 	</ul>
 	
@@ -69,64 +67,7 @@
 				<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
 			</div>
 		</li>
-		{{-- <li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<img src="{{ asset('AdminLTE-3.2.0/dist/img/logo2.jpg') }}" class="img-circle elevation-2" alt="User Image" style="width: 30px; height: 30px;">
-				<p class="d-none d-md-inline">{{Auth::user()->username}}</p>
-			</a>
-			<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right border-0" style="border-radius: 10px">
-				<!-- ... User Profile Dropdown Menu content ... -->
-				<a class="dropdown-item" href="#"><i class="bx bx-user"></i><span>Profile</span></a>
-				<div class="dropdown-divider"></div>
-				<button class="dropdown-item" id="logout-button" type="submit"><i class='bx bx-log-out-circle'></i><span>Logout</span></button>
-			</div>
-		</li> --}}
-		
 	</ul>
 </nav>
 <!-- /.navbar -->
-@push('scripts')
-{{-- <script type="text/javascript">
-    $(document).ready(function() {
-        $('.dropdown-toggle').dropdown();
-		$('#logout-button').click(function(e) {
-			console.log('dsfsdf');
-            e.preventDefault();
-
-            $.ajax({
-                url: "{{ route('logout') }}",
-                type: "POST",
-                dataType: "json",
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Logout Berhasil',
-                            // text: 'Anda akan diarahkan dalam 3 Detik',
-                            timer: 2000,
-                            showCancelButton: false,
-                            showConfirmButton: false
-                        }).then(function() {
-                            window.location.href = "{{ route('home') }}"; // Ganti dengan URL setelah logout berhasil
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Logout Gagal',
-                            text: 'Terjadi kesalahan saat logout.'
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Terjadi Kesalahan',
-                        text: 'Gagal melakukan logout.'
-                    });
-                }
-            });
-        });
-        });
-</script> --}}
-@endpush
 
